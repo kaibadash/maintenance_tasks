@@ -153,5 +153,22 @@ module MaintenanceTasks
       task_data = TaskDataShow.prepare("Maintenance::ParamsTask", arguments: { unknown: nil })
       assert_nothing_raised { task_data.new }
     end
+
+    test "#description returns the Task class comment" do
+      task_data = TaskDataShow.new("Maintenance::EnqueueErrorTask")
+
+      assert_equal(
+        "Any job enqueued for this task errors, see CustomTaskJob.",
+        task_data.description,
+      )
+    end
+
+    test "#description returns nil when the Task class has no comment" do
+      assert_nil TaskDataShow.new("Maintenance::UpdatePostsTask").description
+    end
+
+    test "#description returns nil when the Task is deleted" do
+      assert_nil TaskDataShow.new("Maintenance::DoesNotExist").description
+    end
   end
 end

@@ -84,6 +84,21 @@ module MaintenanceTasks
       assert_no_link "Enable auto-refresh"
     end
 
+    test "show a Task class comment as its description" do
+      visit maintenance_tasks.task_path("Maintenance::EnqueueErrorTask")
+
+      assert_selector(
+        "p.task-description",
+        text: "Any job enqueued for this task errors, see CustomTaskJob.",
+      )
+    end
+
+    test "does not show a description when the Task class has no comment" do
+      visit maintenance_tasks.task_path("Maintenance::UpdatePostsTask")
+
+      assert_no_selector "p.task-description"
+    end
+
     test "show a Task" do
       visit maintenance_tasks_path
 

@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("activerecord", ">= #{minimum_rails_version}")
   spec.add_dependency("csv")
   spec.add_dependency("job-iteration", ">= 1.3.6")
+  spec.add_dependency("prism", ">= 1.0.0")
   spec.add_dependency("railties", ">= #{minimum_rails_version}")
   spec.add_dependency("zeitwerk", ">= 2.6.2")
 end

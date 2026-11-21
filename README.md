@@ -165,6 +165,26 @@ module Maintenance
 end
 ```
 
+#### Describing a Task
+
+A comment placed directly above the Task class is shown on that Task's page in
+the web UI. Use it for a short warning or other context that should be visible
+before the Task is run:
+
+```ruby
+module Maintenance
+  # Rewrites post content. This cannot be undone.
+  class UpdatePostsTask < MaintenanceTasks::Task
+    # ...
+  end
+end
+```
+
+The same comment is read for the compact class syntax
+(`class Maintenance::UpdatePostsTask < MaintenanceTasks::Task`). Comments above
+the enclosing module, magic comments, and RuboCop directives are not shown.
+Line breaks in the comment are preserved.
+
 #### Customizing the Batch Size
 
 When processing records from an Active Record Relation, records are fetched in

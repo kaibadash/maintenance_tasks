@@ -6,6 +6,15 @@
   <%= @task %>
 </h1>
 
+<% if @task.description.present? %>
+  <%# Escape first. sanitize: false keeps the escaped text instead of stripping tags. %>
+  <%= simple_format(
+    h(@task.description),
+    { class: "subtitle is-5 has-text-grey mb-4 task-description" },
+    sanitize: false,
+  ) %>
+<% end %>
+
 <div class="container">
   <%= form_with url: task_runs_path(@task), method: :post do |form| %>
     <% if @task.csv_task? %>

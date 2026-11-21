@@ -44,6 +44,17 @@ module MaintenanceTasks
     #   passed in initialize.
     attr_reader :runs_page
 
+    # The comment directly above the Task class, shown as its description.
+    #
+    # @return [String] the description parsed from the class comment.
+    # @return [nil] if the Task was deleted, has no class comment, or the
+    #   source cannot be read.
+    def description
+      return if deleted?
+
+      TaskComment.extract(name)
+    end
+
     # The Task's source code.
     #
     # @return [String] the contents of the file which defines the Task.
